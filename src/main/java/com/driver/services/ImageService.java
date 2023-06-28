@@ -37,32 +37,43 @@ public class ImageService {
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
+//        Image image = imageRepository2.findById(id).get();
+//        String description = image.getDescription();
+//        int imageSize = 0;
+//        int windowSize = 0;
+//
+//        String[] imageDesc = description.split("[X]", 0);
+//        String[] screenDesc = screenDimensions.split("[X]", 0);
+//
+//        int imageL = StringToInt(imageDesc[0]);
+//        int imageB = StringToInt(imageDesc[1]);
+//        int imageArea = imageL*imageB;
+//
+//        int screenL = StringToInt(screenDesc[0]);
+//        int screenB = StringToInt(screenDesc[1]);
+//        int screenArea = screenB * screenL;
+//
+//        int cnt = screenArea/imageArea;
+//        return cnt;
+
+
         Image image = imageRepository2.findById(id).get();
-        String description = image.getDescription();
-        int imageSize = 0;
-        int windowSize = 0;
 
-        String[] imageDesc = description.split("[X]", 0);
-        String[] screenDesc = screenDimensions.split("[X]", 0);
+        String[] totalArea = screenDimensions.split("X");
+        String[] givenImageArea = image.getDimensions().split("X");
 
-        int imageL = StringToInt(imageDesc[0]);
-        int imageB = StringToInt(imageDesc[1]);
-        int imageArea = imageL*imageB;
+        int l = Integer.parseInt(totalArea[0]) / Integer.parseInt(givenImageArea[0]);
+        int b = Integer.parseInt(totalArea[1]) / Integer.parseInt(givenImageArea[1]);
 
-        int screenL = StringToInt(screenDesc[0]);
-        int screenB = StringToInt(screenDesc[1]);
-        int screenArea = screenB * screenL;
-
-        int cnt = screenArea/imageArea;
-        return cnt;
+        return l * b;
     }
 
-    public int StringToInt(String s){
-        int res = 0;
-        for(int i=0; i<s.length(); i++){
-            int a = s.charAt(i) - '0';
-            res = res*10 + a;
-        }
-        return res;
-    }
+//    public int StringToInt(String s){
+//        int res = 0;
+//        for(int i=0; i<s.length(); i++){
+//            int a = s.charAt(i) - '0';
+//            res = res*10 + a;
+//        }
+//        return res;
+//    }
 }
