@@ -51,12 +51,10 @@ public class ImageService {
 
         int screenL = StringToInt(screenDesc[0]);
         int screenB = StringToInt(screenDesc[1]);
-        int l = screenL/imageL;
-        int b = screenB/imageB;
-//        int screenArea = screenB * screenL;
-//
-//        int cnt = screenArea/imageArea;
-        return l*b;
+        int screenArea = screenB * screenL;
+
+        int cnt = screenArea/imageArea;
+        return cnt;
     }
 
     public int StringToInt(String s){
